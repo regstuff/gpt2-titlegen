@@ -35,7 +35,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install gpt-2-simple
+          pip install gpt-2-simple requests
           
       - name: Execute Python script # Run the app.py
         run: python main.py
