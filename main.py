@@ -4,9 +4,9 @@ from datetime import datetime
 import smtplib, ssl # For emailer
 from email.message import EmailMessage
 
-receiverid = os.environ['receiverid']
-senderid = os.environ['senderid']
-mailpassword = os.environ['mailpass']
+receiverid = os.environ['RECEIVERID']
+senderid = os.environ['SENDERID']
+mailpassword = os.environ['MAILPASS']
 
 token = os.environ['TOKEN']
 owner = os.environ['OWNER']
