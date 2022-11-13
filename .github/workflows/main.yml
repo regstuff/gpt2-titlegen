@@ -43,6 +43,8 @@ jobs:
           MAILPASS: ${{ secrets.MAILPASS }}
           SENDERID: ${{ secrets.SENDERID }}
           RECEIVERID: ${{ secrets.RECEIVERID }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
         
       - name: Run specific commands # Another step name
         run: |
