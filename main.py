@@ -1,5 +1,6 @@
 import gpt_2_simple as gpt2
-import os, requests
+import os, requests, sys, json, urllib.parse
+from requests.structures import CaseInsensitiveDict
 from datetime import datetime
 import smtplib, ssl # For emailer
 from email.message import EmailMessage
