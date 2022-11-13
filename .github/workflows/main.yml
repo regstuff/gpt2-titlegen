@@ -17,13 +17,18 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:    
-      - name: Run specific commands # Another step name
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Use hashes for extra security - https://stackoverflow.com/a/70196496/3016570
+      - name: Checkout Repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        
+      - name: Do wget of model # Another step name
         run: |
           wget -O checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar https://www.dropbox.com/s/89jezt9ykajumae/checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar?dl=0
           echo "Download with wget"
       
-      - name: Run specific commands # Another step name
+      - name: Extract tar # Another step name
         run: |
           tar -xvf checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar 
           echo "Extract tar file"
