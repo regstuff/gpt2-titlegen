@@ -27,7 +27,8 @@ gpt2.generate_to_file(sess,
               destination_path=gen_file                      
               )
 
-open_api_url = f"https://api.github.com/repos/{owner}/gpt2-titlegen/issues" # Close the issue
+with open(gen_file, 'r') as f: mailmsg = f.read()
+open_api_url = f"https://api.github.com/repos/{owner}/gpt2-titlegen/issues" # Open the issue
 #data = '{"title":"today","body":'+'finalmsg'+'}'
 data = '{"title":"' + datetime.today().strftime("%Y%m%d") + '","body":"' + mailmsg + '"}'
 #print(data)
