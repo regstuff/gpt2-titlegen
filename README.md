@@ -1,0 +1,2 @@
+# gpt2-titlegen
+Use a GPT2 model pretrained on about 10,000 YouTube titles from various personal development & motivation channels, to generate 20 title suggestions, every day, and get them mailed to yourself.
