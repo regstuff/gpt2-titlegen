@@ -1,4 +1,5 @@
 import gpt_2_simple as gpt2
+import os, requests
 from datetime import datetime
 import smtplib, ssl # For emailer
 from email.message import EmailMessage
