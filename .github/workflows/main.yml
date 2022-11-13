@@ -6,7 +6,7 @@ name: Get GPT2
 # Controls when the workflow will run
 on:
   schedule:
-  - cron: "0 2,14 * * *"
+  - cron: "0 1 * * *"
 # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
@@ -17,21 +17,25 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      # Use hashes for extra security - https://stackoverflow.com/a/70196496/3016570
-      - name: Checkout Repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      
+    steps:    
       - name: Run specific commands # Another step name
         run: |
           wget -O checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar https://www.dropbox.com/s/89jezt9ykajumae/checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar?dl=0
-          echo "DOwnload with wget"
+          echo "Download with wget"
       
       - name: Run specific commands # Another step name
         run: |
           tar -xvf checkpoint_Multichannel_SgVideosArticles_titles_keywords_v3_800_355.tar 
-          echo "Extract"
+          echo "Extract tar file"
       
-      - name: Push Changes Back To Repo
-        uses: GuillaumeFalourd/git-commit-push@0363e474c79afd69c7e295d331183c0c1d824619
+      - name: Install dependencies
+        run: |
+          pip install gpt-2-simple
+          
+      - name: Execute Python script # Run the app.py
+        run: python main.py
+        
+      - name: Run specific commands # Another step name
+        run: |
+          cat gpt2_gentext.txt
+          echo "Show the output"
