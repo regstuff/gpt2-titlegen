@@ -39,6 +39,10 @@ jobs:
           
       - name: Execute Python script # Run the app.py
         run: python main.py
+        env: 
+          MAILPASS: ${{ secrets.MAILPASS }}
+          SENDERID: ${{ secrets.SENDERID }}
+          RECEIVERID: ${{ secrets.RECEIVERID }}
         
       - name: Run specific commands # Another step name
         run: |
