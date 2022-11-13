@@ -7,6 +7,13 @@ receiverid = os.environ['receiverid']
 senderid = os.environ['senderid']
 mailpassword = os.environ['mailpass']
 
+token = os.environ['TOKEN']
+owner = os.environ['OWNER']
+
+headers = CaseInsensitiveDict()
+headers["Accept"] = "application/vnd.github+json"
+headers["Authorization"] = "token " + token
+
 def sendmail(mailmessage):
   if mailmessage != '':
     context = ssl.create_default_context()
@@ -43,3 +50,21 @@ gpt2.generate_to_file(sess,
 
 with open(gen_file, 'r') as f: mailmsg = f.read()
 sendmail(mailmsg)
+
+open_api_url = f"https://api.github.com/repos/{owner}/gpt2-titlegen/issues" # Close the issue
+#data = '{"title":"today","body":'+'finalmsg'+'}'
+data = '{"title":"' + datetime.today().strftime("%Y%m%d") + '","body":"' + mailmsg + '"}'
+#print(data)
+resp = requests.post(open_api_url, headers=headers, data=data)
+if resp.status_code == 201: 
+  #print(issue_number)
+  issue_number = resp.json()["number"]
+  print(f'Issue {issue_number} was opened.')
+
+  close_api_url = f"https://api.github.com/repos/{owner}/gpt2-titlegen/issues/{issue_number}" # Close the issue
+  data = '{"state":"closed"}'
+  resp = requests.patch(close_api_url, headers=headers, data=data)
+  if resp.status_code == 200: print(f'Issue {resp.json()["number"]} was closed.')
+  else: print(f'Issue {resp.json()["number"]} closing failed with status {resp.status_code}, and reason {resp.reason}')
+
+else: print(resp.status_code, resp.text)
